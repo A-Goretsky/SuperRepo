@@ -125,18 +125,14 @@ public class Rational implements Comparable
               return (numerator * ((Rational)other).getD()) -(denominator * ((Rational)other).getN());
           }
       }
-     throw new ClassCastException("\ncompareTo() input not comparable\n");
+    if (other == null)
+        throw new NullPointerException();
+    throw new ClassCastException("\ncompareTo() input not comparable\n");
   }
-  public boolean equals(Object frac){
-    boolean retVal;
-    //check for aliasing
-    retVal = this == (Rational)frac;
-    if (!retVal){ //if this and frac are not the same object
-      int x = compareTo(frac);
-      if (x == 0){retVal=true;}
-      else{retVal = false;}
-    }
-    return retVal;}
+    
+  public boolean equals(Object other) {
+    return ( (this == other) || (compareTo(other)==0));
+  }
   
   //=======================================================================================
   //main method
