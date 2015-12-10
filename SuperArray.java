@@ -18,7 +18,7 @@
   *  remove item (while maintaining "left-justification")
   *****************************/
 
-public class SuperArray implements ListInt{
+public class SuperArray {
   
   //~~~~~INSTANCE VARS~~~~~
   //underlying container, or "core" of this data structure:
@@ -113,49 +113,22 @@ public class SuperArray implements ListInt{
   //removes the item at index
   //shifts elements left to fill in newly-empted slot
   public void remove( int index ) { //It removes it, but resets x and then adds the rest back. 
-    Comparable[] tempora = new Comparable[_data.length];
-    if (_data[index]!=0){
-      _size-=1;
-    
-    }
-    for (int x = 0; x < _data.length  ; x++){
-      if (x != index){
-       tempora[x]=_data[x];
-       
-      }
-      else if(x == index){
-        if (x == _data.length-1){
-          tempora[x]=0;
-        
+    if (index < _size) {
+        for (int i=index; i<_lastPos;i++) {
+            _data[i]=_data[i+1];
         }
-        else{
-        tempora[x]=_data[x+1]; 
-        x+=1;}
-      }
-      
+    _size--;
+    _lastPos--;
     }
-    
-    tempora[tempora.length-1]=0; //Changes last index to 0
-    _data=tempora;
-    size();
-    
-    
   }
   
   
   //return number of meaningful items in _data
   public int size() {  //returns all non 0 ints
-    _size=0;
-    for (int x = 0 ; x < _data.length ; x++){
-      if (_data[x] != 0){
-        _size+=1;
-      }
-      else{}
-    }
-    return _size;
-    
-    
+      return _size;
   }
+    
+    
     //is sorted method
     public boolean isSorted(){
 	   for (int i = 1; i < _size; i++) {
@@ -177,63 +150,29 @@ public class SuperArray implements ListInt{
   //main method for testing
   public static void main( String[] args ) 
   {
-    SuperArray curtis = new SuperArray();
-    System.out.println("Printing empty SuperArray curtis...");
-    System.out.println(curtis);
     
-    for( int i = 0; i < curtis._data.length; i++ ) {
-      curtis.set(i,i*2);
-      curtis._size++; //necessary bc no add() method yet
-    }
-    
-    System.out.println("Printing populated SuperArray curtis...");
-    System.out.println(curtis);
-    
-    System.out.println("testing get()...");
-    for( int i = 0; i < curtis._size; i++ ) {
-      System.out.print( "item at index" + i + ":\t" );
-      System.out.println( curtis.get(i) );
-    }
-    
-    System.out.println("Expanded SuperArray curtis:");
-    curtis.expand();
-    System.out.println(curtis);
-    
-   
-     ListInt mayfield = new SuperArray();
-     System.out.println("Printing empty SuperArray mayfield...");
-     System.out.println(mayfield);
-
-     mayfield.add(5);
-     
-     mayfield.add(4);
-     mayfield.add(3);
-     mayfield.add(2);
-     mayfield.add(1);
-     
-     
-     System.out.println("Printing populated SuperArray mayfield...");
-     System.out.println(mayfield);
-    
-     
-     mayfield.remove(3);
+        SuperArray mayfield = new SuperArray();
+        Binary b = new Binary(67);
+        Binary c = new Binary("10010");
+     	Hexadecimal h1 = new Hexadecimal(21);
+     	Hexadecimal h2 = new Hexadecimal("5F3");
+     	Rational r1 = new Rational(50,2);
+     	Rational r2 = new Rational(38,2);
+     	Rational r3 = new Rational(44,2);
+     	mayfield.add(h2);
+     	mayfield.add(r2);
+     	mayfield.add(b);
+     	mayfield.add(h1);
+     	mayfield.add(r3);
+     	mayfield.add(r1);
+     	System.out.println(mayfield);
+     	System.out.println(mayfield.linSearch(b));
+     	System.out.println(mayfield.linSearch(r3));
+     	System.out.println(mayfield.isSorted());
       
-     System.out.println("Printing SuperArray mayfield post-remove...");
-     System.out.println(mayfield);
-     mayfield.remove(3);
-     System.out.println("Printing SuperArray mayfield post-remove...");
-     System.out.println(mayfield);
-     
-     mayfield.add(3,99);
+      
 
-     System.out.println("Printing SuperArray mayfield post-insert...");
-     System.out.println(mayfield);
-     mayfield.add(2,88);
-     System.out.println("Printing SuperArray mayfield post-insert...");
-     System.out.println(mayfield);
-     mayfield.add(1,77);
-     System.out.println("Printing SuperArray mayfield post-insert...");
-     System.out.println(mayfield);
+     
 
   }//end main
   

@@ -114,7 +114,7 @@ public class Rational implements Comparable
     numerator /= gcd;
     denominator /= gcd;
   }
-  public int compareTo(Object frac){
+  public int compareTo(Object other){
       if (other instanceof Comparable) {
           if (other instanceof Binary) {
               return (int)floatValue() - ((Binary)other).getDec();}
@@ -122,7 +122,7 @@ public class Rational implements Comparable
               return (int)floatValue() - ((Hexadecimal)other).getDec();
           }
           else if (other instanceof Rational) {
-              return (_n * ((Rational)other).getD()) -(_d*((Rational)other).getN());
+              return (numerator * ((Rational)other).getD()) -(denominator * ((Rational)other).getN());
           }
       }
      throw new ClassCastException("\ncompareTo() input not comparable\n");
