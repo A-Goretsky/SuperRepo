@@ -65,6 +65,8 @@ public class Binary {
       decToBin(14) -> "1110"
       =====================================*/
     public static String decToBin( int n ) {
+        if (n == 0)
+            return "0";
         String ans = "";
         while (n != 0) {
             ans = n % 2 + ans;
@@ -89,6 +91,8 @@ public class Binary {
         if (n != 0) {
             ans += decToBinR(n / 2) + (n % 2);
         }
+        if (n == 0 && ans.length() == 0)
+            return "0";
         return ans;
     }
 
@@ -152,6 +156,10 @@ public class Binary {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
+        if (other == null)
+            throw new NullPointerException();
+		if (!(other instanceof Binary))
+			throw new ClassCastException("\n Error: compareTo() input was not of class Binary");
         return this._decNum - ((Binary) other)._decNum; 
     }
 
@@ -189,6 +197,14 @@ public class Binary {
 	System.out.println( b1.compareTo(b3) ); //should be 0
 	System.out.println( b1.compareTo(b4) ); //should be neg
 	System.out.println( b4.compareTo(b1) ); //should be pos
+    
+    //null object test
+    Object bla = null;
+    System.out.println(b1.equals(bla));
+
+	//invalid object test
+	Object stuff = new Object();
+	System.out.println(b1.equals(stuff));
 
 	/*=========================================
 	  =========================================*/

@@ -35,6 +35,8 @@ public class Hexadecimal {
 
 //decimal to hex, iteratively
     public static String decToHex(int n) {
+        if (n == 0)
+            return "0";
         String ans ="";
         while (n != 0) {
             ans = HEXDIGITS.charAt(n % 16) + ans;
@@ -49,6 +51,8 @@ public class Hexadecimal {
 		if (n != 0) {
 			ans += decToHexR(n / 16) + HEXDIGITS.charAt(n % 16);
 		}
+        if (n == 0 && ans.length() == 0)
+            return "0";
 		return ans;
     }
 
@@ -78,6 +82,8 @@ public class Hexadecimal {
 	
 //compareTo method
 	public int compareTo(Object other) {
+        if (other == null)
+            throw new NullPointerException();
 		if (!(other instanceof Hexadecimal))
 			throw new ClassCastException("\n Error: compareTo() input was not of class Hexadecimal!");
         return _decNum - ((Hexadecimal) other)._decNum;
@@ -118,6 +124,10 @@ public class Hexadecimal {
 	System.out.println( h1.compareTo(h3) ); //should be 0
 	System.out.println( h1.compareTo(h4) ); //should be neg
 	System.out.println( h4.compareTo(h1) ); //should be pos*/
+        
+    //null object test
+    Object bla = null;
+    System.out.println(h1.equals(bla));
 
 	//invalid object test
 	Object stuff = new Object();
