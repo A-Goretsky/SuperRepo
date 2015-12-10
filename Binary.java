@@ -9,7 +9,15 @@ public class Binary implements Comparable {
     private int _decNum;
     private String _binNum;
 
+    //accessor methods
+    public int getDec() {
+        return _decNum;
+    }
 
+    public String getBin() {
+        return _binNum;
+    }
+    
     /*=====================================
       default constructor
       pre:  n/a
@@ -52,7 +60,6 @@ public class Binary implements Comparable {
     public String toString() { 
         return _binNum;
     }
-
 
     /*=====================================
       String decToBin(int) -- converts base-10 input to binary
@@ -156,11 +163,20 @@ public class Binary implements Comparable {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
+        if (other instanceof Comparable) {
+            if (other instanceof Binary) {
+                return _decNum - ((Binary)other).getDec();
+            }
+            else if (other instanceof Hexadecimal) {
+                return _decNum - ((Hexadecimal)other).getDec();
+            }
+            else if (other instanceof Rational) {
+                return _decNum * ((Rational)other).getD() -((Rational)other).getN();
+            }
+        }
         if (other == null)
             throw new NullPointerException();
-		if (!(other instanceof Binary))
-			throw new ClassCastException("\n Error: compareTo() input was not of class Binary");
-        return this._decNum - ((Binary) other)._decNum; 
+        throw new ClassCastException("\nError: compareTo() input not comparable!\n");
     }
 
 

@@ -10,6 +10,15 @@ public class Hexadecimal implements Comparable {
     public int _decNum;
     public String _hexNum;
 
+//accessor methods
+    public int getDec() {
+        return _decNum;
+    }
+
+    public String getHex() {
+        return _hexNum;
+    }
+    
 //default constructor
     public Hexadecimal() {
         _hexNum = "";
@@ -82,11 +91,19 @@ public class Hexadecimal implements Comparable {
 	
 //compareTo method
 	public int compareTo(Object other) {
+        if (other instanceof Comparable) {
+            if (other instanceof Binary) {
+          		return _decNum - ((Binary)other).getDec();}
+            else if (other instanceof Hexadecimal) {
+          		return _decNum - ((Hexadecimal)other).getDec(); 
+            }
+            else if (other instanceof Rational) {
+                return _decNum * ((Rational)other).getD() -((Rational)other).getN();
+            }
+        }
         if (other == null)
             throw new NullPointerException();
-		if (!(other instanceof Hexadecimal))
-			throw new ClassCastException("\n Error: compareTo() input was not of class Hexadecimal!");
-        return _decNum - ((Hexadecimal) other)._decNum;
+        throw new ClassCastException("\n Error: compareTo() input was not comparable!");
 	}
     
 	
