@@ -22,7 +22,7 @@ public class SuperArray implements ListInt{
   
   //~~~~~INSTANCE VARS~~~~~
   //underlying container, or "core" of this data structure:
-  private int[] _data;
+  private Comparable[] _data;
   
   //position of last meaningful value
   private int _lastPos;
@@ -35,7 +35,7 @@ public class SuperArray implements ListInt{
   //default constructor – initializes 10-item array
   public SuperArray() 
   { 
-    _data = new int[10];
+    _data = new Comparable[10];
     _lastPos = -1; //flag to indicate no lastpos yet
     _size = 0; 
   }
@@ -60,7 +60,7 @@ public class SuperArray implements ListInt{
   //double capacity of this SuperArray
   private void expand() 
   { 
-    int[] temp = new int[ _data.length * 2 ];
+    Comparable[] temp = new Comparable[ _data.length * 2 ];
     for( int i = 0; i < _data.length; i++ )
       temp[i] = _data[i];
     _data = temp;
@@ -68,14 +68,14 @@ public class SuperArray implements ListInt{
   
   
   //accessor -- return value at specified index
-  public int get( int index ) { return _data[index]; }
+  public Comparable get( int index ) { return _data[index]; }
   
   
   //mutator -- set value at index to newVal, 
   //           return old value at index
-  public int set( int index, int newVal ) 
+  public Comparable set( int index, Comparable newVal ) 
   { 
-    int temp = _data[index];
+    Comparable temp = _data[index];
     _data[index] = newVal;
     return temp;
   }
@@ -83,7 +83,7 @@ public class SuperArray implements ListInt{
   
   // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
   //adds an item after the last item
-  public void add( int newVal ) { //After the last meaningful index it adds it
+  public void add( Comparable newVal ) { //After the last meaningful index it adds it
     _lastPos+=1;
     _data[_lastPos]=newVal;
     size();
@@ -94,8 +94,8 @@ public class SuperArray implements ListInt{
   
   //inserts an item at index
   //shifts existing elements to the right
-  public void add( int index, int newVal ) { //Adds in the index, has boolean value to see if it has changed a val
-    int[] tempora = new int[_data.length + 1];
+  public void add( int index, Comparable newVal ) { //Adds in the index, has boolean value to see if it has changed a val
+    Comparable[] tempora = new Comparable[_data.length + 1];
     boolean done = false;
     for (int x =0; x < _data.length  ; x++){
       if (x!=index){tempora[x]=_data[x];}
@@ -113,7 +113,7 @@ public class SuperArray implements ListInt{
   //removes the item at index
   //shifts elements left to fill in newly-empted slot
   public void remove( int index ) { //It removes it, but resets x and then adds the rest back. 
-    int[] tempora = new int[_data.length];
+    Comparable[] tempora = new Comparable[_data.length];
     if (_data[index]!=0){
       _size-=1;
     
@@ -156,6 +156,22 @@ public class SuperArray implements ListInt{
     
     
   }
+    //is sorted method
+    public boolean isSorted(){
+	   for (int i = 1; i < _size; i++) {
+           if ( _data[i].compareTo(_data[i-1]) < 0 )
+               return false;
+       }
+        return true;
+    }
+    
+    //lin search method
+    public int linSearch(Comparable target) {
+        for (int i = 0; i < _size; i++) {
+            if (target.equals( get(i) )) return i;
+        }
+        return -1;
+    }
 
   
   //main method for testing

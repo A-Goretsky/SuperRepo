@@ -9,6 +9,14 @@ public class Rational implements Comparable
   //instance variables for class Rational
   private int numerator;
   private int denominator;
+    
+  public int getN() { 
+      return numerator; 
+  }
+
+  public int getD() {  
+      return denominator; 
+  }
   //=======================================================================================
   //constructors
   public Rational(){ //default constuctor sets value of instance to 0/1
@@ -107,12 +115,17 @@ public class Rational implements Comparable
     denominator /= gcd;
   }
   public int compareTo(Object frac){
-    Rational temp = (Rational)frac;
-    if (((this.numerator *((Rational)frac).denominator) >(((Rational)frac).numerator* this.denominator)))
-      return 1;
-    if (((this.numerator *((Rational)frac).denominator) <(((Rational)frac).numerator* this.denominator)))
-      return -1;
-    return 0;
+      if (other instanceof Comparable) {
+          if (other instanceof Binary) {
+              return (int)floatValue() - ((Binary)other).getDec();}
+          else if (other instanceof Hexadecimal) {
+              return (int)floatValue() - ((Hexadecimal)other).getDec();
+          }
+          else if (other instanceof Rational) {
+              return (_n * ((Rational)other).getD()) -(_d*((Rational)other).getN());
+          }
+      }
+     throw new ClassCastException("\ncompareTo() input not comparable\n");
   }
   public boolean equals(Object frac){
     boolean retVal;
