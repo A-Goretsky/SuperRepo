@@ -93,7 +93,8 @@ public class Hexadecimal implements Comparable {
 	public int compareTo(Object other) {
         if (other instanceof Comparable) {
             if (other instanceof Binary) {
-          		return _decNum - ((Binary)other).getDec();}
+          		return _decNum - ((Binary)other).getDec();
+            }
             else if (other instanceof Hexadecimal) {
           		return _decNum - ((Hexadecimal)other).getDec(); 
             }
