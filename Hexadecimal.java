@@ -3,7 +3,7 @@
 //HW44 - This or That or Fourteen Other Things
 //2015-12-8
 
-public class Hexadecimal {
+public class Hexadecimal implements Comparable {
     
 //instance vars
     private final static String HEXDIGITS = "0123456789ABCDEF";
